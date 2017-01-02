@@ -79,11 +79,11 @@ class Router {
 	 */
 	public function registerLogin() {
 		Route::get('/', ['as' => 'decoy::account@login',
-			'uses' => '\Bkwld\Decoy\Controllers\Login@getLogin']);
+			'uses' => '\Bkwld\Decoy\Controllers\Login@showLoginForm']);
 		Route::post('/', ['as' => 'decoy::account@postLogin',
-			'uses' => '\Bkwld\Decoy\Controllers\Login@postLogin']);
+			'uses' => '\Bkwld\Decoy\Controllers\Login@login']);
 		Route::get('logout', ['as' => 'decoy::account@logout',
-			'uses' => '\Bkwld\Decoy\Controllers\Login@getLogout']);
+			'uses' => '\Bkwld\Decoy\Controllers\Login@logout']);
 	}
 
 	/**

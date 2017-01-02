@@ -3,11 +3,9 @@
 // Dependencies
 use Auth;
 use Bkwld\Decoy\Models\Admin;
-use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-use Illuminate\Foundation\Auth\ResetsPasswords;
-use Illuminate\Routing\Controller;
 use Illuminate\Foundation\Validation\ValidatesRequests;
+use Illuminate\Routing\Controller;
 use Former;
 
 /**
@@ -15,7 +13,7 @@ use Former;
  * PasswordController that Laravel's `php artisan make:auth` generates.
  */
 class Login extends Controller {
-	use AuthenticatesUsers, ThrottlesLogins, ValidatesRequests;
+	use AuthenticatesUsers, ValidatesRequests;
 
 	/**
 	 * Use the guest middleware to redirect logged in admins away from the login
@@ -24,7 +22,7 @@ class Login extends Controller {
 	 * @return void
 	 */
 	public function __construct() {
-		$this->middleware('decoy.guest', ['except' => 'getLogout']);
+		$this->middleware('decoy.guest', ['except' => 'logout']);
 	}
 
 	/**
@@ -54,7 +52,7 @@ class Login extends Controller {
 	public function logout() {
 
 		// Logout the session
-		Auth::guard($this->getGuard())->logout();
+		Auth::logout();
 
 		// Redirect back to previous page so that switching users takes you back to
 		// your previous page.
